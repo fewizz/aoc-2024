@@ -21,7 +21,7 @@ fn main() {
     let mut ip: usize = 0;
     let mut output: Vec<u8> = Vec::new();
 
-    /*while ip < prog.len() {
+    while ip < prog.len() {
         let opcode = prog[ip];
         let operand = prog[ip+1];
 
@@ -64,23 +64,6 @@ fn main() {
             }
             _ => { unreachable!() }
         };
-    }*/
-    loop {
-        /*let mut b_reg = a_reg % 8;  // 2,4
-        b_reg ^= 4;                 // 1,4
-        let c_reg = a_reg >> b_reg; // 7,5
-        b_reg ^= c_reg;             // 4,1
-        b_reg ^= 4;                 // 1,4
-        let val = b_reg % 8;        // 5,5
-        output.push(val as u8);
-        a_reg >>= 3;                // 0,3
-        if a_reg == 0 {break;}*/
-        let mut b_reg = (a_reg % 8) ^ 4;
-        b_reg = (b_reg ^ (a_reg >> b_reg)) ^ 4;
-        let val = b_reg % 8;        // 5,5
-        output.push(val as u8);
-        a_reg >>= 3;                // 0,3
-        if a_reg == 0 {break;}
     }
 
     for (idx, ch) in output.iter().enumerate() {
