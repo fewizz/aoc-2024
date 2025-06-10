@@ -27,8 +27,6 @@ fn complexity(moves: Vec<char>) -> usize {
         (' ', (0, 3)), ('0', (1, 3)), ('A', (2, 3))
     ]);
 
-    // let possible_numeric_keypad_moves: Vec<char> = Vec::new();
-
     fn possible_moves(
         keypad: &HashMap<char, (i32, i32)>,
         moves: &Vec<char>,
