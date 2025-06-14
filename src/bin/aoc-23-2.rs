@@ -9,11 +9,11 @@ fn main() {
 
     for line in input.lines() {
         let (l, r) = line.split_once('-').unwrap();
-        connections.entry(l.to_string()).or_insert_with(HashSet::new).insert(r.to_string());
-        connections.entry(r.to_string()).or_insert_with(HashSet::new).insert(l.to_string());
+        connections.entry(l).or_insert_with(HashSet::new).insert(r);
+        connections.entry(r).or_insert_with(HashSet::new).insert(l);
     }
 
-    let mut lans: Vec<HashSet<&String>> = Vec::new();
+    let mut lans: Vec<HashSet<&str>> = Vec::new();
 
     for (h, other_hosts) in connections.iter() {
         for l in lans.iter_mut() {
@@ -21,12 +21,12 @@ fn main() {
                 l.insert(h);
             }
         }
-        lans.push(HashSet::from([h]));
+        lans.push(HashSet::from([*h]));
     }
 
     lans.sort_by(|a, b| a.len().cmp(&b.len()));
     let result = lans.pop().unwrap();
-    let mut result: Vec<String> = result.iter().map(|x|(*x).clone()).collect();
+    let mut result: Vec<&str> = result.iter().map(|x|*x).collect();
     result.sort();
     let result = result.join(",");
     println!("{result}")
